@@ -28,7 +28,7 @@ function transformBigIntsToString(obj: Record<string, any>): Record<string, any>
 export const EventsTable = ({ contractName, className }: EventsTableProps) => {
   const { chain } = useNetwork();
 
-  const fromBlock = chain?.id === 43113 ? 28425664n : 5026623n;
+  const fromBlock = chain?.id === 43113 ? 29425664n : 5126623n;
 
   const { data: messageSentEvents} = useScaffoldEventHistory({
     contractName,
