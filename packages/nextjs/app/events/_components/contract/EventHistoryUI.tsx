@@ -4,6 +4,7 @@ import { useReducer } from "react";
 import { useDeployedContractInfo, useNetworkColor } from "~~/hooks/scaffold-eth";
 import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
 import { ContractName } from "~~/utils/scaffold-eth/contract";
+import {EventsTable} from "~~/app/events/_components/EventsTable";
 
 type EventHistoryUIProps = {
     contractName: ContractName;
@@ -35,5 +36,5 @@ export const EventHistoryUI = ({ contractName, className = "" }: EventHistoryUIP
         );
     }
 
-    return (<div/>);
+    return (<EventsTable contractName={contractName} className={className} />);
 };

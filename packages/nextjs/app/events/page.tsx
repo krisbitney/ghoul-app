@@ -1,14 +1,8 @@
 import type { NextPage } from "next";
-import { getMetadata } from "~~/utils/scaffold-eth/getMetadata";
 import {ContractEventHistory} from "~~/app/events/_components/ContractEventHistory";
 
-export const metadata = getMetadata({
-  title: "Ghoul Contracts",
-  description: "Stake and borrow from any EVM chain",
-});
-
-const Home: NextPage = () => {
-  return (
+const Events: NextPage = () => {
+    return (
     <>
       <ContractEventHistory />
       <div className="text-center mt-8 bg-secondary p-10">
@@ -19,4 +13,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Events;

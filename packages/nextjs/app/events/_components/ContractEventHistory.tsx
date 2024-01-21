@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import {useEffect, useMemo} from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { useNetwork } from "wagmi";
 import { BarsArrowUpIcon } from "@heroicons/react/20/solid";
-import { ContractUI } from "~~/app/debug/_components/contract";
 import { ContractName } from "~~/utils/scaffold-eth/contract";
 import { useAllContracts } from "~~/utils/scaffold-eth/contractsData";
 import {EventHistoryUI} from "~~/app/events/_components/contract/EventHistoryUI";
@@ -13,7 +12,12 @@ const selectedContractStorageKey = "scaffoldEth2.selectedContract";
 
 export function ContractEventHistory() {
   const { chain } = useNetwork();
-  const { contractsData, contractNames } = useAllContracts(chain?.id);
+  const { contractsData, contractNames: unfilteredContractNames } = useAllContracts(chain?.id);
+
+  const contractNames = useMemo(() => {
+    // @ts-ignore
+    return unfilteredContractNames.filter(contractName => (contractName === "router" || contractName === "facilitator"));
+  }, [unfilteredContractNames]);
 
   const [selectedContract, setSelectedContract] = useLocalStorage<ContractName>(
     selectedContractStorageKey,
