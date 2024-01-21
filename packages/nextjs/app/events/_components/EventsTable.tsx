@@ -1,6 +1,6 @@
 import {ContractName} from "~~/utils/scaffold-eth/contract";
 import {useScaffoldEventHistory} from "~~/hooks/scaffold-eth";
-import {useNetwork} from "wagmi";
+import {useBlockNumber, useNetwork} from "wagmi";
 import React, {useMemo} from "react";
 import {TransactionHash} from "~~/app/blockexplorer/_components";
 
@@ -26,21 +26,20 @@ function transformBigIntsToString(obj: Record<string, any>): Record<string, any>
 }
 
 export const EventsTable = ({ contractName, className }: EventsTableProps) => {
-  const { chain } = useNetwork();
-
-  const fromBlock = chain?.id === 43113 ? 29425664n : 5126623n;
+  const { data: currentBlock } = useBlockNumber()
 
   const { data: messageSentEvents} = useScaffoldEventHistory({
     contractName,
     eventName: "MessageSent",
-    fromBlock,
+    fromBlock: currentBlock ? currentBlock - 2000n : 0n,
     watch: true,
   });
 
+  console.log(contractName)
   const { data: messageReceivedEvents } = useScaffoldEventHistory({
     contractName,
     eventName: "MessageReceived",
-    fromBlock,
+    fromBlock: currentBlock ? currentBlock - 2000n : 0n,
     watch: true
   });
 
