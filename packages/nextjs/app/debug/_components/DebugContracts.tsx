@@ -2,16 +2,18 @@
 
 import { useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { useNetwork } from "wagmi";
 import { BarsArrowUpIcon } from "@heroicons/react/20/solid";
 import { ContractUI } from "~~/app/debug/_components/contract";
 import { ContractName } from "~~/utils/scaffold-eth/contract";
-import { getAllContracts } from "~~/utils/scaffold-eth/contractsData";
+import { useAllContracts } from "~~/utils/scaffold-eth/contractsData";
 
 const selectedContractStorageKey = "scaffoldEth2.selectedContract";
-const contractsData = getAllContracts();
-const contractNames = Object.keys(contractsData) as ContractName[];
 
 export function DebugContracts() {
+  const { chain } = useNetwork();
+  const { contractsData, contractNames } = useAllContracts(chain?.id);
+
   const [selectedContract, setSelectedContract] = useLocalStorage<ContractName>(
     selectedContractStorageKey,
     contractNames[0],
@@ -21,7 +23,7 @@ export function DebugContracts() {
     if (!contractNames.includes(selectedContract)) {
       setSelectedContract(contractNames[0]);
     }
-  }, [selectedContract, setSelectedContract]);
+  }, [selectedContract, setSelectedContract, contractNames]);
 
   return (
     <div className="flex flex-col gap-y-6 lg:gap-y-8 py-8 lg:py-12 justify-center items-center">

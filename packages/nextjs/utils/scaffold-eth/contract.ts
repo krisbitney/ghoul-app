@@ -236,6 +236,7 @@ export type EventFilters<
   IndexedEventInputs<TContractName, TEventName> extends never
     ? never
     : {
+        // @ts-ignore
         [Key in IsContractDeclarationMissing<
           any,
           IndexedEventInputs<TContractName, TEventName>["name"]

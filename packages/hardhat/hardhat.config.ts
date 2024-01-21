@@ -19,16 +19,57 @@ const deployerPrivateKey =
 // If not set, it uses ours Etherscan default API key.
 const etherscanApiKey = process.env.ETHERSCAN_API_KEY || "DNXJA8RX2Q3VZ4URQIWP7Z68CJXQZSC6AW";
 
+const SOLC_SETTINGS = {
+  optimizer: {
+    enabled: true,
+    runs: 1_000,
+  },
+};
+
 const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.17",
-    settings: {
-      optimizer: {
-        enabled: true,
-        // https://docs.soliditylang.org/en/latest/using-the-compiler.html#optimizer-options
-        runs: 200,
+    compilers: [
+      {
+        version: "0.8.19",
+        settings: SOLC_SETTINGS,
       },
-    },
+      {
+        version: "0.8.7",
+        settings: SOLC_SETTINGS,
+      },
+      {
+        version: "0.6.6",
+        settings: SOLC_SETTINGS,
+      },
+      {
+        version: "0.4.24",
+        settings: SOLC_SETTINGS,
+      },
+      {
+        version: "0.8.10",
+        settings: SOLC_SETTINGS,
+      },
+      {
+        version: "0.8.7",
+        settings: SOLC_SETTINGS,
+      },
+      {
+        version: "0.8.0",
+        settings: SOLC_SETTINGS,
+      },
+      {
+        version: "0.7.0",
+        settings: SOLC_SETTINGS,
+      },
+      {
+        version: "0.7.5",
+        settings: SOLC_SETTINGS,
+      },
+      {
+        version: "0.6.12",
+        settings: SOLC_SETTINGS,
+      },
+    ],
   },
   defaultNetwork: "localhost",
   namedAccounts: {
