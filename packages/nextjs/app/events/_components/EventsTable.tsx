@@ -75,7 +75,7 @@ export const EventsTable = ({ contractName, className }: EventsTableProps) => {
                   <td className="w-2/12 md:py-4">
                      <span className="mr-1">{event.name}</span>
                   </td>
-                  <td className="w-2/1 md:py-4">{JSON.stringify(event.args, null, 2)}</td>
+                  <td className="w-2/1 md:py-4">{JSON.stringify(event.args).replace(/("[^"]+":)/g, "\n$1").replace(/( }$)/g, "\n}")}</td>
                   <td className="w-1/12 md:py-4">
                     <TransactionHash hash={event.hash}/>
                   </td>
