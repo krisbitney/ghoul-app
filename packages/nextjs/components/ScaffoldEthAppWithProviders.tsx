@@ -44,13 +44,7 @@ export const ScaffoldEthAppWithProviders = ({ children }: { children: React.Reac
     <WagmiConfig config={wagmiConfig}>
         <ConnectKitProvider>
           <ProgressBar />
-          <RainbowKitProvider
-            chains={appChains.chains}
-            avatar={BlockieAvatar}
-            theme={isDarkMode ? darkTheme() : lightTheme()}
-          >
             <ScaffoldEthApp>{children}</ScaffoldEthApp>
-          </RainbowKitProvider>
         </ConnectKitProvider>
     </WagmiConfig>
   );
